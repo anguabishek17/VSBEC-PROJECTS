@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loading...</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <style>
+    .loader { width:80px; height:80px; border:10px solid #e2e8f0; border-top-color:#5a67d8; border-radius:50%; animation: spin 1s linear infinite; margin:20vh auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+  <script>
+    setTimeout(() => { window.location.href = '{{ url_for('main.dashboard') }}'; }, 1000);
+  </script>
+</head>
+<body>
+  <div class="loader" aria-label="Loading"></div>
+</body>
+</html>

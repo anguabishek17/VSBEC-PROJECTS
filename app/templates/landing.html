@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome | Student Progress Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <style>
+    .hero { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center; }
+    .start-btn { width:120px; height:120px; border-radius:60px; background:#5a67d8; color:#fff; display:flex; align-items:center; justify-content:center; font-size:48px; cursor:pointer; box-shadow:0 10px 20px rgba(0,0,0,0.2); transition:transform .2s; }
+    .start-btn:hover { transform:scale(1.05); }
+    .flowers { position:fixed; inset:0; pointer-events:none; overflow:hidden; }
+    .flower { position:absolute; width:20px; height:20px; background:radial-gradient(circle at 30% 30%, #ff9a9e, #fad0c4); border-radius:50%; animation: float 2s ease-out forwards; }
+    @keyframes float { from { transform: translateY(0) scale(0.5); opacity:1; } to { transform: translateY(-200px) scale(1.5); opacity:0; } }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Track and Celebrate Student Excellence</h1>
+    <div id="start" class="start-btn" aria-label="Start">▶</div>
+  </div>
+  <div id="flowers" class="flowers"></div>
+  <script>
+    const start = document.getElementById('start');
+    const flowers = document.getElementById('flowers');
+    function spawnFlower() {
+      const f = document.createElement('div');
+      f.className = 'flower';
+      f.style.left = Math.random()*100 + 'vw';
+      f.style.top = (50 + Math.random()*50) + 'vh';
+      flowers.appendChild(f);
+      setTimeout(() => f.remove(), 2000);
+    }
+    start.addEventListener('click', () => {
+      const t0 = Date.now();
+      const interval = setInterval(spawnFlower, 50);
+      setTimeout(() => {
+        clearInterval(interval);
+        window.location.href = '{{ url_for('auth.login') }}';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
