@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Student Registration</h2>
+  <form method="post" class="form" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="grid">
+      <div class="field">{{ form.name.label }} {{ form.name(class_='input') }} {% for e in form.name.errors %}<div class="error">{{ e }}</div>{% endfor %}</div>
+      <div class="field">{{ form.registration_number.label }} {{ form.registration_number(class_='input') }} {% for e in form.registration_number.errors %}<div class="error">{{ e }}</div>{% endfor %}</div>
+      <div class="field">{{ form.department.label }} {{ form.department(class_='input') }} {% for e in form.department.errors %}<div class="error">{{ e }}</div>{% endfor %}</div>
+      <div class="field">{{ form.section.label }} {{ form.section(class_='input') }} {% for e in form.section.errors %}<div class="error">{{ e }}</div>{% endfor %}</div>
+      <div class="field">{{ form.year_of_study.label }} {{ form.year_of_study(class_='input') }} {% for e in form.year_of_study.errors %}<div class="error">{{ e }}</div>{% endfor %}</div>
+    </div>
+    <div class="actions"><button class="btn" type="submit">Register</button></div>
+  </form>
+{% endblock %}

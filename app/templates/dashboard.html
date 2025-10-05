@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Dashboard</h2>
+  <div class="cards">
+    <a class="card" href="{{ url_for('main.register_student') }}">Student Registration</a>
+    <a class="card" href="{{ url_for('main.profiles') }}">Profiles & Activities</a>
+    <a class="card" href="{{ url_for('main.dept_toppers') }}">Department Toppers</a>
+    <a class="card" href="{{ url_for('main.college_toppers') }}">College Toppers</a>
+    <a class="card" href="{{ url_for('main.below_average') }}">Below Average</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Below Average (Lowest by Section)</h2>
+  {% for section, students in lowest_by_section.items() %}
+    <h3>Section {{ section }}</h3>
+    <ul>
+      {% for s in students %}
+        <li>{{ s.name }} ({{ s.reg }}) — {{ s.points }} pts</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No data yet.</p>
+  {% endfor %}
+{% endblock %}

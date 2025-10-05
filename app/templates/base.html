@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Progress Tracker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-left"><a href="{{ url_for('main.dashboard') }}">Dashboard</a></div>
+    <div class="nav-right">
+      <a href="{{ url_for('main.register_student') }}">Register</a>
+      <a href="{{ url_for('main.profiles') }}">Profiles</a>
+      <a href="{{ url_for('main.dept_toppers') }}">Dept Toppers</a>
+      <a href="{{ url_for('main.college_toppers') }}">College Toppers</a>
+      <a href="{{ url_for('main.below_average') }}">Below Average</a>
+      <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
+  </nav>
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash">
+        {% for category, message in messages %}
+          <div class="flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="auth">
+    <h2>Admin Login</h2>
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="field">
+        {{ form.username.label }}
+        {{ form.username(class_='input') }}
+        {% for e in form.username.errors %}<div class="error">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="field">
+        {{ form.password.label }}
+        {{ form.password(class_='input') }}
+        {% for e in form.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
+      </div>
+      <div class="actions">{{ form.submit(class_='btn') }}</div>
+    </form>
+    <p class="hint">Use your assigned admin credentials.</p>
+  </div>
+{% endblock %}

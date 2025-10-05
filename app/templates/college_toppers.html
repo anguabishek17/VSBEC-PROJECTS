@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>College Toppers</h2>
+  <ol>
+    {% for s in toppers %}
+      <li>{{ s.name }} ({{ s.reg }}) — {{ s.points }} pts</li>
+    {% else %}
+      <li>No data yet.</li>
+    {% endfor %}
+  </ol>
+{% endblock %}
