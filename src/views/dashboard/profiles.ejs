@@ -1,0 +1,54 @@
+<div class="grid">
+  <div>
+    <% if (selected) { %>
+      <div class="card">
+        <h3><%= selected.name %> - <%= selected.reg_no %></h3>
+        <p><b>Department:</b> <%= selected.department %> | <b>Section:</b> <%= selected.section %> | <b>Year:</b> <%= selected.year %></p>
+        <h4>Achievements</h4>
+        <ul>
+          <% achievements.forEach(a => { %>
+            <li><b><%= a.category %></b>: <%= a.event_name %> - <%= a.position %> (+<%= a.points %>)</li>
+          <% }) %>
+        </ul>
+        <p><b>Total Points:</b> <%= selected.total %></p>
+        <h4>Add Achievement</h4>
+        <form method="POST" action="/students/profile/<%= encodeURIComponent(selected.reg_no) %>/achievement">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <label>Category</label>
+          <select class="input" name="category" required>
+            <option value="academic">Academic</option>
+            <option value="co-curricular">Co-curricular</option>
+            <option value="extra-curricular">Extra-curricular</option>
+          </select>
+          <label>Event Name</label>
+          <input class="input" type="text" name="event_name" required>
+          <label>Position</label>
+          <select class="input" name="position" required>
+            <option value="first">First (10)</option>
+            <option value="second">Second (5)</option>
+            <option value="third">Third (3)</option>
+            <option value="participation">Participation (1)</option>
+          </select>
+          <button class="button" type="submit">Add</button>
+        </form>
+      </div>
+    <% } else { %>
+      <div class="card"><p>Enter a registration number to view details.</p></div>
+    <% } %>
+  </div>
+  <div class="list">
+    <div class="search">
+      <form method="GET" action="/students/profile">
+        <input class="input" type="text" name="q" value="<%= q %>" placeholder="Search by name or reg no">
+        <button class="button" type="submit">Search</button>
+      </form>
+    </div>
+    <ul>
+      <% students.forEach(s => { %>
+        <li>
+          <a href="/students/profile/<%= encodeURIComponent(s.reg_no) %>"><%= s.section %> - <%= s.name %> (<%= s.reg_no %>)</a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+</div>

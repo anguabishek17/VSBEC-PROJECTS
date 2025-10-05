@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Progress Tracker</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Student Progress Tracker</h1>
+    <nav>
+      <% if (user) { %>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/students/register">Register Student</a>
+        <a href="/students/profile">Profiles</a>
+        <a href="/dashboard/dept-toppers">Dept Toppers</a>
+        <a href="/dashboard/college-toppers">College Toppers</a>
+        <a href="/dashboard/below-average">Below Average</a>
+        <form method="POST" action="/auth/logout" style="display:inline">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit">Logout</button>
+        </form>
+      <% } %>
+    </nav>
+  </header>
+  <main>
+    <%- body %>
+  </main>
+</body>
+</html>

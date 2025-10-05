@@ -1,0 +1,21 @@
+<div class="card">
+  <h2>Department Toppers</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Department</th><th>Section</th><th>Name</th><th>Reg No</th><th>Total Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% rows.forEach(r => { %>
+        <tr>
+          <td><%= r.department %></td>
+          <td><%= r.section %></td>
+          <td><%= r.name %></td>
+          <td><%= r.reg_no %></td>
+          <td><%= r.total_points %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
