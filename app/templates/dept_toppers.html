@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Department Toppers</h2>
+  {% for dept, students in result.items() %}
+    <h3>{{ dept }}</h3>
+    <ol>
+      {% for s in students %}
+        <li>{{ s.name }} ({{ s.reg }}) — {{ s.points }} pts</li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p>No data yet.</p>
+  {% endfor %}
+{% endblock %}

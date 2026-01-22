@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="profiles-header">
+    <h2>Student Profiles</h2>
+    <form method="get" class="search">
+      <input type="text" name="q" placeholder="Search by Reg No or Name" value="{{ search }}"/>
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+  <div class="profiles-layout">
+    <div class="student-detail">
+      {% if selected_student %}
+        <h3>{{ selected_student.name }} <small>({{ selected_student.registration_number }})</small></h3>
+        <p>{{ selected_student.department }} • Section {{ selected_student.section }} • Year {{ selected_student.year_of_study }}</p>
+
+        <h4>Activities</h4>
+        <ul class="activities">
+          {% for a in activities %}
+            <li>
+              <span class="badge">{{ a.category }}</span>
+              <span>{{ a.event_name }}</span>
+              <span class="points">+{{ a.points }}</span>
+            </li>
+          {% else %}
+            <li>No activities yet</li>
+          {% endfor %}
+        </ul>
+
+        <div class="total">Total Points: <strong>{{ total_points }}</strong></div>
+
+        <h4>Add Activity</h4>
+        <form method="post" class="form" novalidate>
+          {{ form.hidden_tag() }}
+          <div class="grid">
+            <div class="field">{{ form.category.label }} {{ form.category(class_='input') }}</div>
+            <div class="field">{{ form.event_name.label }} {{ form.event_name(class_='input') }} {% for e in form.event_name.errors %}<div class="error">{{ e }}</div>{% endfor %}</div>
+            <div class="field">{{ form.position.label }} {{ form.position(class_='input') }}</div>
+          </div>
+          <div class="actions"><button class="btn" type="submit">Add</button></div>
+        </form>
+      {% else %}
+        <p>Select a student from the list to view details and add activities.</p>
+      {% endif %}
+    </div>
+    <div class="students-list">
+      <ul>
+        {% for s in students %}
+          <li>
+            <a href="{{ url_for('main.profiles', reg=s.registration_number) }}">
+              <strong>{{ s.registration_number }}</strong> — {{ s.name }} ({{ s.section }})
+            </a>
+          </li>
+        {% else %}
+          <li>No students yet</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
